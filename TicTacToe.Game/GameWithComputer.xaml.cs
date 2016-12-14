@@ -16,23 +16,13 @@ using System.Windows.Shapes;
 namespace TicTacToe.Game
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для GameWithComputer.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class GameWithComputer : UserControl
     {
-        public MainWindow()
+        public GameWithComputer()
         {
             InitializeComponent();
-        }
-
-        private void button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }
