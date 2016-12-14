@@ -21,7 +21,7 @@ namespace TicTacToe.Game
                 line.StrokeThickness = 8;
 
                 line.X1 = 30;
-                line.X2 = 85 * 4 - 55;
+                line.X2 = 85 * 3 + 30;
                 line.Y1 = 85 * (i - 1) + 30;
                 line.Y2 = 85 * (i - 1) + 30;
 
@@ -35,7 +35,7 @@ namespace TicTacToe.Game
                 line.StrokeThickness = 8;
 
                 line.Y1 = 30;
-                line.Y2 = 85 * 4 - 55;
+                line.Y2 = 85 * 3 + 30;
                 line.X1 = 85 * (i - 1) + 30;
                 line.X2 = 85 * (i - 1) + 30;
 

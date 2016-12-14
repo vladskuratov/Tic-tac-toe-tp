@@ -6,8 +6,8 @@
              xmlns:local="clr-namespace:TicTacToe.Game"
              mc:Ignorable="d" 
              d:DesignHeight="350" d:DesignWidth="525">
-    <Grid x:Name="grid">
-        <Button x:Name="button" Content="Back" Margin="0,10,10,0" VerticalAlignment="Top" Width="75" HorizontalAlignment="Right" Click="button_Click"/>
+    <Canvas x:Name="grid" Background="Transparent" MouseLeftButtonDown="grid_MouseLeftButtonDown">
+        <Button x:Name="button" Content="Back" VerticalAlignment="Top" Width="75" Click="button_Click" Canvas.Left="421" Canvas.Top="10" Margin="0" HorizontalAlignment="Right"/>
 
-    </Grid>
+    </Canvas>
 </UserControl>
