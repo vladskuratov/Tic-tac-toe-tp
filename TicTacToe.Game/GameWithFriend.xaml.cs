@@ -23,9 +23,8 @@ namespace TicTacToe.Game
         public GameWithFriend()
         {
             InitializeComponent();
+            int x;
         }
-
-
     }
 }
 
