@@ -20,7 +20,7 @@ namespace TicTacToe.Game
     /// </summary>
     public partial class MainWindow : Window
     {
-        int test_vlad;
+        int test_vlad_2;
         public MainWindow()
         {
             InitializeComponent();
