@@ -1,29 +1,53 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace TicTacToe.Game
 {
-    /// <summary>
-    /// Логика взаимодействия для GameWithFriend.xaml
-    /// </summary>
     public partial class GameWithFriend : UserControl
     {
         public GameWithFriend()
         {
             InitializeComponent();
-            int x;
+
+            Line line;
+
+            for (int i = 2; i <= 3; i++)
+            {
+                line = new Line();
+                line.Stroke = Brushes.LightGray;
+                line.StrokeThickness = 8;
+
+                line.X1 = 30;
+                line.X2 = 85 * 4 - 55;
+                line.Y1 = 85 * (i - 1) + 30;
+                line.Y2 = 85 * (i - 1) + 30;
+
+                grid.Children.Add(line);
+            }
+
+            for (int i = 2; i <= 3; i++)
+            {
+                line = new Line();
+                line.Stroke = Brushes.LightGray;
+                line.StrokeThickness = 8;
+
+                line.Y1 = 30;
+                line.Y2 = 85 * 4 - 55;
+                line.X1 = 85 * (i - 1) + 30;
+                line.X2 = 85 * (i - 1) + 30;
+
+                grid.Children.Add(line);
+            }
+        }
+
+        public event Action<int> SwitchScreen;
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            SwitchScreen?.Invoke(0);
         }
     }
 }
