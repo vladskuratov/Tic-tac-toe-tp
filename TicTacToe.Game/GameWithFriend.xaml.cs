@@ -3,7 +3,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using System.Linq;
 
 namespace TicTacToe.Game
 {
@@ -134,11 +133,7 @@ namespace TicTacToe.Game
 
         private void CheckForWin()
         {
-            if (stepsMade >= 9)
-            {
-                Draw();
-                return;
-            }
+            if (stepsMade < 5) return;
 
             for (int i = 0; i < 3; i++)
             {
@@ -166,15 +161,16 @@ namespace TicTacToe.Game
                 Win(2, 0, 1);
                 return;
             }
+
+            if (stepsMade >= 9)
+            {
+                Draw();
+                return;
+            }
         }
 
         private void Win(int y, int x, int pos)
         {
-            // 0 - diagonal 1
-            // 1 - diagonal 2
-            // 2 - horizontal
-            // 3 - vertical
-
             isFieldBlocked = true;
 
             if (pos == 0) DrawLine(30, 30 + 85 * 3, 30, 30 + 85 * 3);
@@ -182,7 +178,7 @@ namespace TicTacToe.Game
             if (pos == 2) DrawLine(30, 85 * 3 + 30, 30 + 85 * y + 85 / 2, 30 + 85 * y + 85 / 2);
             if (pos == 3) DrawLine(30 + 85 * x + 85 / 2, 30 + 85 * x + 85 / 2, 30, 85 * 3 + 30);
 
-            if (field[y, x] == X) MessageBox.Show("show smth..........");
+            MessageBox.Show(string.Format("Выиграл {0}", (field[y, x] == 1) ? "крестик" : "нолик"), "Партия!");
         }
 
         public void DrawLine(int x1, int x2, int x3, int x4)
