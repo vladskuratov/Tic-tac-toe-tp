@@ -9,24 +9,17 @@
     <Canvas x:Name="grid" Background="Transparent" MouseLeftButtonDown="grid_MouseLeftButtonDown">
         <Button x:Name="button" Content="Back" VerticalAlignment="Top" Width="75" Click="button_Click" Canvas.Left="324" Canvas.Top="238" Margin="0" HorizontalAlignment="Right"/>
         <Button x:Name="button1" Content="Restart" Canvas.Left="404" Canvas.Top="238" Width="75" Click="button1_Click"/>
-        <Button x:Name="button2" Content="0" Canvas.Left="324" Canvas.Top="106" Width="75" Height="75" IsEnabled="False" FontSize="40"/>
-        <Button x:Name="button3" Content="0" Canvas.Left="404" Canvas.Top="106" Width="75" Height="75
+        <Button x:Name="button2" Content="0" Canvas.Left="324" Canvas.Top="52" Width="75" Height="75" IsEnabled="False" FontSize="40"/>
+        <Button x:Name="button3" Content="0" Canvas.Left="405" Canvas.Top="52" Width="75" Height="75
                 " IsEnabled="False" FontSize="40"/>
-        <Label x:Name="label" Content="" Canvas.Left="324" Canvas.Top="26" Height="75
-               " Width="75"/>
-        <Label x:Name="label1" Content="" Canvas.Left="404" Canvas.Top="26" Height="75" Width="75"/>
+        <Label x:Name="label" Content="You:" Canvas.Left="325" Canvas.Top="29" Height="37" Width="75"/>
+        <Label x:Name="label1" Content="Computer:" Canvas.Left="404" Canvas.Top="29" Height="40" Width="75"/>
         <Button x:Name="button4" Content="Clear score" Canvas.Left="324" Canvas.Top="265" Width="155" Click="button4_Click"/>
-        <ComboBox x:Name="comboBox" Canvas.Left="324" Canvas.Top="211" Width="75" SelectedIndex="0">
-            <ComboBoxItem x:Name="playX">X</ComboBoxItem>
-            <ComboBoxItem x:Name="playO">O</ComboBoxItem>
-        </ComboBox>
-        <ComboBox x:Name="comboBox1" Canvas.Left="405" Canvas.Top="211" Width="74" SelectedIndex="0">
-            <ComboBoxItem x:Name="easyMode">Easy</ComboBoxItem>
-            <ComboBoxItem x:Name="hardMode">Hard</ComboBoxItem>
-            <ComboBoxItem x:Name="randomMode">Random</ComboBoxItem>
-        </ComboBox>
-        <Label x:Name="label2" Content="I play:" Canvas.Left="324" Canvas.Top="186"/>
-        <Label x:Name="label3" Content="Easiness:" Canvas.Left="405" Canvas.Top="186"/>
+        <Label x:Name="label2" Content="I play:" Canvas.Left="326" Canvas.Top="158"/>
+        <Label x:Name="label3" Content="Starts:" Canvas.Left="326" Canvas.Top="182"/>
+        <RadioButton x:Name="radioButton" Content="X" Canvas.Left="376" Canvas.Top="163" IsChecked="True" Checked="radioButton_Checked"/>
+        <RadioButton x:Name="radioButton1" Content="O" Canvas.Left="413" Canvas.Top="163" Checked="radioButton1_Checked"/>
+        <CheckBox x:Name="checkBox" Content="Computer" Canvas.Left="376" Canvas.Top="187" Checked="checkBox_Checked" Unchecked="checkBox_Unchecked"/>
 
     </Canvas>
 </UserControl>

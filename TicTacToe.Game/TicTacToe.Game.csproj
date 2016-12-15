@@ -58,6 +58,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ComputerBrain.cs" />
+    <Compile Include="Factory.cs" />
+    <Compile Include="GameWithComputer.Process.cs" />
+    <Compile Include="GameWithFriend.Process.cs" />
+    <Compile Include="IComputerBrain.cs" />
     <Compile Include="StartScreen.xaml.cs">
       <DependentUpon>StartScreen.xaml</DependentUpon>
     </Compile>

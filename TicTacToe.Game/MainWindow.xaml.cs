@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Threading.Tasks;
+using System.Windows;
 
 namespace TicTacToe.Game
 {
@@ -24,13 +25,22 @@ namespace TicTacToe.Game
             gc.SwitchScreen += SwitchScreenImpl;
 
             contentControl.Content = ss;
+            contentControl.Margin = new Thickness { Left = 0 };
         }
 
-        public void SwitchScreenImpl(ScreenType screen)
+        public async void SwitchScreenImpl(ScreenType screen)
         {
+            contentControl.Margin = new Thickness{ Left = 0 };
+
             if (screen == ScreenType.StartScreen) contentControl.Content = ss;
             if (screen == ScreenType.GameWithFriend) contentControl.Content = gf;
             if (screen == ScreenType.GameWithComputer) contentControl.Content = gc;
+
+            //for (int i = 400; i < 0; i--)
+            //{
+            //    //await Task.Delay(5);
+            //    contentControl.Margin = new Thickness { Left = i };
+            //}
         }
     }
 }

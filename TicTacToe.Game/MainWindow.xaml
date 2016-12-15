@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Tic-Tac-Toe" Height="350" Width="525" ResizeMode="CanMinimize" WindowStyle="ThreeDBorderWindow" WindowStartupLocation="CenterScreen">
     <Grid>
-        <ContentControl x:Name="contentControl"/>
+        <ContentControl x:Name="contentControl" Margin="525, 0, 0, 0"/>
     </Grid>
     
 </Window>
