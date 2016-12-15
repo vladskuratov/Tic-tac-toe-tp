@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -17,24 +18,32 @@ namespace TicTacToe.Game
 
             for (int i = 2; i <= 3; i++)
                 DrawLine(85 * (i - 1) + 30, 85 * (i - 1) + 30, 30, 85 * 3 + 30);
+
+            DrawX(-0.1, 3.39);
+            DrawO(-0.07, 4.36);
+
+            label.Background = Brushes.LightCyan;
         }
 
-        public event Action<int> SwitchScreen;
+        public event Action<ScreenType> SwitchScreen;
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            SwitchScreen?.Invoke(0);
+            SwitchScreen?.Invoke(ScreenType.StartScreen);
         }
 
-        bool isFieldBlocked = false;
-        int step = 85;
+        const int X = 1;
+        const int O = 2;
+        const int step = 85;
 
+        bool isFieldBlocked = false;
         int[,] field = new int[3, 3];
-        static int X = 1;
-        static int O = 2;
-        static int playerPuts = X;
+        int playerPuts = X;
 
         int stepsMade = 0;
+
+        int xWins = 0;
+        int oWins = 0;
 
         private void grid_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
@@ -65,9 +74,13 @@ namespace TicTacToe.Game
                                         DrawO(i, j);
                                     }
 
-                                    SwapStep();
-                                    CheckForWin();
-                                    break;
+                                    if (CheckForWinOrDraw() == false)
+                                    {
+                                        SwapStep();
+                                        break;
+                                    }
+                                    else break;
+
                                 }
                             }
                         }
@@ -82,10 +95,18 @@ namespace TicTacToe.Game
             if (playerPuts == 3)
             {
                 playerPuts = 1;
+
+                label1.Background = null;
+                label.Background = Brushes.LightCyan;
+            }
+            else
+            {
+                label.Background = null;
+                label1.Background = Brushes.LightCyan;
             }
         }
 
-        private void DrawX(int i, int j)
+        private void DrawX(double i, double j)
         {
             Line line = new Line();
 
@@ -113,7 +134,7 @@ namespace TicTacToe.Game
             grid.Children.Add(line);
         }
 
-        private void DrawO(int i, int j)
+        private void DrawO(double i, double j)
         {
             Ellipse ellipse = new Ellipse();
 
@@ -122,66 +143,16 @@ namespace TicTacToe.Game
             ellipse.StrokeThickness = 8;
             ellipse.Stroke = Brushes.LightGray;
 
-            ellipse.Width = 65;
-            ellipse.Height = 65;
+            ellipse.Width = 55;
+            ellipse.Height = 55;
 
-            Canvas.SetLeft(ellipse, 40 + step * j);
-            Canvas.SetTop(ellipse, 40 + step * i);
+            Canvas.SetLeft(ellipse, 44 + step * j);
+            Canvas.SetTop(ellipse, 44 + step * i);
 
             grid.Children.Add(ellipse);
         }
 
-        private void CheckForWin()
-        {
-            if (stepsMade < 5) return;
-
-            for (int i = 0; i < 3; i++)
-            {
-                if (field[i, 0] == field[i, 1] && field[i, 1] == field[i, 2] && field[i, 2] != 0)
-                {
-                    Win(i, 2, 2);
-                    return;
-                }
-
-                else if (field[0, i] == field[1, i] && field[1, i] == field[2, i] && field[2, i] != 0)
-                {
-                    Win(2, i, 3);
-                    return;
-                }
-            }
-
-            if (field[0, 0] == field[1, 1] && field[1, 1] == field[2, 2] && field[2, 2] != 0)
-            {
-                Win(2, 2, 0);
-                return;
-            }
-
-            if (field[2, 0] == field[1, 1] && field[1, 1] == field[2, 0] && field[2, 0] != 0)
-            {
-                Win(2, 0, 1);
-                return;
-            }
-
-            if (stepsMade >= 9)
-            {
-                Draw();
-                return;
-            }
-        }
-
-        private void Win(int y, int x, int pos)
-        {
-            isFieldBlocked = true;
-
-            if (pos == 0) DrawLine(30, 30 + 85 * 3, 30, 30 + 85 * 3);
-            if (pos == 1) DrawLine(30 + 85 * 3, 30, 30, 30 + 85 * 3);
-            if (pos == 2) DrawLine(30, 85 * 3 + 30, 30 + 85 * y + 85 / 2, 30 + 85 * y + 85 / 2);
-            if (pos == 3) DrawLine(30 + 85 * x + 85 / 2, 30 + 85 * x + 85 / 2, 30, 85 * 3 + 30);
-
-            MessageBox.Show(string.Format("Выиграл {0}", (field[y, x] == 1) ? "крестик" : "нолик"), "Партия!");
-        }
-
-        public void DrawLine(int x1, int x2, int x3, int x4)
+        public void DrawLine(double x1, double x2, double x3, double x4)
         {
             Line line = new Line();
 
@@ -197,10 +168,118 @@ namespace TicTacToe.Game
             grid.Children.Add(line);
         }
 
+        private bool? CheckForWinOrDraw()
+        {
+            if (stepsMade < 5) return false;
+
+            for (int i = 0; i < 3; i++)
+            {
+                if (field[i, 0] == field[i, 1] && field[i, 1] == field[i, 2] && field[i, 2] != 0)
+                {
+                    Win(i, 2, 2);
+                    return true;
+                }
+
+                else if (field[0, i] == field[1, i] && field[1, i] == field[2, i] && field[2, i] != 0)
+                {
+                    Win(2, i, 3);
+                    return true;
+                }
+            }
+
+            if (field[0, 0] == field[1, 1] && field[1, 1] == field[2, 2] && field[2, 2] != 0)
+            {
+                Win(2, 2, 0);
+                return true;
+            }
+
+            if (field[0, 2] == field[1, 1] && field[1, 1] == field[2, 0] && field[2, 0] != 0)
+            {
+                Win(2, 0, 1);
+                return true;
+            }
+
+            if (stepsMade >= 9)
+            {
+                Draw();
+                return null;
+            }
+
+            return false;
+        }
+
+        private void Win(int y, int x, int pos)
+        {
+            isFieldBlocked = true;
+
+            if (pos == 0) DrawLine(30, 30 + 85 * 3, 30, 30 + 85 * 3);
+            if (pos == 1) DrawLine(30 + 85 * 3, 30, 30, 30 + 85 * 3);
+            if (pos == 2) DrawLine(30, 85 * 3 + 30, 30 + 85 * y + 85 / 2, 30 + 85 * y + 85 / 2);
+            if (pos == 3) DrawLine(30 + 85 * x + 85 / 2, 30 + 85 * x + 85 / 2, 30, 85 * 3 + 30);
+
+            MessageBox.Show(string.Format("Выиграл {0}", (field[y, x] == 1) ? "крестик" : "нолик"), "Партия!");
+
+            if (field[y, x] == X)
+            {
+                xWins++;
+                button2.Content = xWins.ToString();
+            }
+
+            if (field[y, x] == O)
+            {
+                oWins++;
+                button3.Content = oWins.ToString();
+            }
+        }
+
         private void Draw()
         {
             isFieldBlocked = true;
+
+            MessageBox.Show("Произошла ничья", "Партия!");
+        }
+
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (var line in grid.Children.OfType<Line>().ToList())
+            {
+                grid.Children.Remove(line);
+            }
+
+            foreach (var ellipse in grid.Children.OfType<Ellipse>().ToList())
+            {
+                grid.Children.Remove(ellipse);
+            }
+
+            for (int i = 2; i <= 3; i++)
+                DrawLine(30, 85 * 3 + 30, 85 * (i - 1) + 30, 85 * (i - 1) + 30);
+
+            for (int i = 2; i <= 3; i++)
+                DrawLine(85 * (i - 1) + 30, 85 * (i - 1) + 30, 30, 85 * 3 + 30);
+
+            DrawX(-0.1, 3.39);
+            DrawO(-0.07, 4.36);
+
+            label.Background = Brushes.LightCyan;
+            label1.Background = null;
+
+            isFieldBlocked = false;
+
+            field = new int[3, 3];
+            playerPuts = X;
+
+            stepsMade = 0;     
+        }
+
+        private void button4_Click(object sender, RoutedEventArgs e)
+        {
+            button1_Click(sender, e);
+
+            button2.Content = 0;
+            button3.Content = 0;
+
+            xWins = 0;
+            oWins = 0;
         }
     }
 }
-

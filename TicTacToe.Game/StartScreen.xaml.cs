@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace TicTacToe.Game
 {
@@ -9,18 +10,20 @@ namespace TicTacToe.Game
         public StartScreen()
         {
             InitializeComponent();
+
+            label.Background = Brushes.LightCyan;
         }
 
-        public event Action<int> SwitchScreen;
+        public event Action<ScreenType> SwitchScreen;
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            SwitchScreen?.Invoke(1);
+            SwitchScreen?.Invoke(ScreenType.GameWithFriend);
         }
 
         private void button1_Click(object sender, RoutedEventArgs e)
         {
-            SwitchScreen?.Invoke(2);
+            SwitchScreen?.Invoke(ScreenType.GameWithComputer);
         }
     }
 }

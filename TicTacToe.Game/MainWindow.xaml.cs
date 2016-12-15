@@ -2,6 +2,13 @@
 
 namespace TicTacToe.Game
 {
+    public enum ScreenType
+    {
+        StartScreen,
+        GameWithFriend,
+        GameWithComputer
+    }
+
     public partial class MainWindow : Window
     {
         StartScreen ss = new StartScreen();
@@ -19,11 +26,11 @@ namespace TicTacToe.Game
             contentControl.Content = ss;
         }
 
-        public void SwitchScreenImpl(int s)
+        public void SwitchScreenImpl(ScreenType screen)
         {
-            if (s == 0) contentControl.Content = ss;
-            if (s == 1) contentControl.Content = gf;
-            if (s == 2) contentControl.Content = gc;
+            if (screen == ScreenType.StartScreen) contentControl.Content = ss;
+            if (screen == ScreenType.GameWithFriend) contentControl.Content = gf;
+            if (screen == ScreenType.GameWithComputer) contentControl.Content = gc;
         }
     }
 }

@@ -9,7 +9,7 @@
     <Grid>
         <Button x:Name="button" Content="Play with friend" HorizontalAlignment="Center" Margin="0,133,0,0" VerticalAlignment="Top" Width="200" Click="button_Click" Height="40" FontSize="20"/>
         <Button x:Name="button1" Content="Play with computer" HorizontalAlignment="Center" Margin="0,207,0,0" VerticalAlignment="Top" Width="200" Click="button1_Click" Height="40" FontSize="20"/>
-        <Label x:Name="label" Width="400" HorizontalContentAlignment="Center" Content="Tic-Tac-Toe" HorizontalAlignment="Center" Margin="0,54,0,0" VerticalAlignment="Top" FontSize="26" Background="#FFBFDDFF" Foreground="#FFA07D7D"/>
+        <Label x:Name="label" Width="400" HorizontalContentAlignment="Center" Content="Tic-Tac-Toe" HorizontalAlignment="Center" Margin="0,54,0,0" VerticalAlignment="Top" FontSize="26" Foreground="#FFA07D7D"/>
 
     </Grid>
 </UserControl>

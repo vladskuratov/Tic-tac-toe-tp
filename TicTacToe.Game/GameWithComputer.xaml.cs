@@ -43,11 +43,11 @@ namespace TicTacToe.Game
             }
         }
 
-        public event Action<int> SwitchScreen;
+        public event Action<ScreenType> SwitchScreen;
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            SwitchScreen?.Invoke(0);
+            SwitchScreen?.Invoke(ScreenType.StartScreen);
         }
     }
 }

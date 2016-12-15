@@ -7,7 +7,15 @@
              mc:Ignorable="d" 
              d:DesignHeight="350" d:DesignWidth="525">
     <Canvas x:Name="grid" Background="Transparent" MouseLeftButtonDown="grid_MouseLeftButtonDown">
-        <Button x:Name="button" Content="Back" VerticalAlignment="Top" Width="75" Click="button_Click" Canvas.Left="421" Canvas.Top="10" Margin="0" HorizontalAlignment="Right"/>
+        <Button x:Name="button" Content="Back" VerticalAlignment="Top" Width="75" Click="button_Click" Canvas.Left="324" Canvas.Top="238" Margin="0" HorizontalAlignment="Right"/>
+        <Button x:Name="button1" Content="Restart" Canvas.Left="404" Canvas.Top="238" Width="75" Click="button1_Click"/>
+        <Button x:Name="button2" Content="0" Canvas.Left="324" Canvas.Top="106" Width="75" Height="75" IsEnabled="False" FontSize="40"/>
+        <Button x:Name="button3" Content="0" Canvas.Left="404" Canvas.Top="106" Width="75" Height="75
+                " IsEnabled="False" FontSize="40"/>
+        <Label x:Name="label" Content="" Canvas.Left="324" Canvas.Top="26" Height="75
+               " Width="75"/>
+        <Label x:Name="label1" Content="" Canvas.Left="404" Canvas.Top="26" Height="75" Width="75"/>
+        <Button x:Name="button4" Content="Clear score" Canvas.Left="324" Canvas.Top="265" Width="155" Click="button4_Click"/>
 
     </Canvas>
 </UserControl>
