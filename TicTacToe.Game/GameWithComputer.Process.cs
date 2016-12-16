@@ -6,9 +6,13 @@ namespace TicTacToe.Game
 {
     public partial class GameWithComputer
     {
+        IComputerBrain cb = Factory.Default.GetComputerBrain();
         IDrawActions da = Factory.Default.GetDrawActions();
+        IGameProcessing gp = Factory.Default.GetGameProcessing();
 
         public event Action<ScreenType> SwitchScreen;
+
+        int pos = -1;
 
         const int X = 1;
         const int O = 2;
@@ -25,12 +29,8 @@ namespace TicTacToe.Game
         int userWins = 0;
         int computerWins = 0;
 
-        IComputerBrain cb;
-
         private async void ComputersTurn()
         {
-            cb = Factory.Default.GetComputerBrain();
-
             await Task.Delay(250);
 
             int x = cb.MyTurnYX(field)[1];
@@ -48,52 +48,24 @@ namespace TicTacToe.Game
                 da.DrawO(y, x, step, grid);
             }
 
-            if (CheckForWinOrDraw() == false)
+            if (gp.CheckForWinOrDraw(field,stepsMade, ref isFieldBlocked, ref pos) == true)
+            {
+                Win(y, x, pos);
+                return;
+            }
+
+            if (gp.CheckForWinOrDraw(field, stepsMade, ref isFieldBlocked, ref pos) == false)
             {
                 computersTurn = false;
                 return;
             }
-            else return;
-        }
 
-        private bool? CheckForWinOrDraw()
-        {
-            if (stepsMade < 5) return false;
-
-            for (int i = 0; i < 3; i++)
+            if (gp.CheckForWinOrDraw(field, stepsMade, ref isFieldBlocked, ref pos) == null)
             {
-                if (field[i, 0] == field[i, 1] && field[i, 1] == field[i, 2] && field[i, 2] != 0)
-                {
-                    Win(i, 2, 2);
-                    return true;
-                }
-
-                else if (field[0, i] == field[1, i] && field[1, i] == field[2, i] && field[2, i] != 0)
-                {
-                    Win(2, i, 3);
-                    return true;
-                }
+                gp.Draw(ref isFieldBlocked);
+                return;
             }
 
-            if (field[0, 0] == field[1, 1] && field[1, 1] == field[2, 2] && field[2, 2] != 0)
-            {
-                Win(2, 2, 0);
-                return true;
-            }
-
-            if (field[0, 2] == field[1, 1] && field[1, 1] == field[2, 0] && field[2, 0] != 0)
-            {
-                Win(2, 0, 1);
-                return true;
-            }
-
-            if (stepsMade >= 9)
-            {
-                Draw();
-                return null;
-            }
-
-            return false;
         }
 
         private async void Win(int y, int x, int pos)
@@ -111,13 +83,6 @@ namespace TicTacToe.Game
             await Task.Delay(250);
 
             MessageBox.Show(string.Format("Выиграл {0}", (field[y, x] == userPuts) ? "ты" : "компьютер"), "Партия!");
-        }
-
-        private void Draw()
-        {
-            isFieldBlocked = true;
-
-            MessageBox.Show("Произошла ничья", "Партия!");
         }
     }
 }

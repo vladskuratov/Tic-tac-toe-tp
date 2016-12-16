@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 
@@ -7,8 +8,11 @@ namespace TicTacToe.Game
     public partial class GameWithFriend
     {
         IDrawActions da = Factory.Default.GetDrawActions();
+        IGameProcessing gp = Factory.Default.GetGameProcessing();
 
         public event Action<ScreenType> SwitchScreen;
+
+        int pos = -1;
 
         const int X = 1;
         const int O = 2;
@@ -40,47 +44,7 @@ namespace TicTacToe.Game
             }
         }
 
-        private bool? CheckForWinOrDraw()
-        {
-            if (stepsMade < 5) return false;
-
-            for (int i = 0; i < 3; i++)
-            {
-                if (field[i, 0] == field[i, 1] && field[i, 1] == field[i, 2] && field[i, 2] != 0)
-                {
-                    Win(i, 2, 2);
-                    return true;
-                }
-
-                else if (field[0, i] == field[1, i] && field[1, i] == field[2, i] && field[2, i] != 0)
-                {
-                    Win(2, i, 3);
-                    return true;
-                }
-            }
-
-            if (field[0, 0] == field[1, 1] && field[1, 1] == field[2, 2] && field[2, 2] != 0)
-            {
-                Win(2, 2, 0);
-                return true;
-            }
-
-            if (field[0, 2] == field[1, 1] && field[1, 1] == field[2, 0] && field[2, 0] != 0)
-            {
-                Win(2, 0, 1);
-                return true;
-            }
-
-            if (stepsMade >= 9)
-            {
-                Draw();
-                return null;
-            }
-
-            return false;
-        }
-
-        private void Win(int y, int x, int pos)
+        private async void Win(int y, int x, int pos)
         {
             isFieldBlocked = true;
 
@@ -92,14 +56,9 @@ namespace TicTacToe.Game
             if (field[y, x] == X) button2.Content = ++xWins;
             if (field[y, x] == O) button3.Content = ++oWins;
 
+            await Task.Delay(250);
+
             MessageBox.Show(string.Format("Выиграл {0}", (field[y, x] == X) ? "крестик" : "нолик"), "Партия!");
-        }
-
-        private void Draw()
-        {
-            isFieldBlocked = true;
-
-            MessageBox.Show("Произошла ничья", "Партия!");
         }
     }
 }

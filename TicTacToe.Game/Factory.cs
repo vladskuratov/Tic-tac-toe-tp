@@ -18,6 +18,7 @@
 
         IComputerBrain _cb = new ComputerBrain();
         IDrawActions _da = new DrawActions();
+        IGameProcessing _ga = new GameProcessing();
 
         public IComputerBrain GetComputerBrain()
         {
@@ -27,6 +28,11 @@
         public IDrawActions GetDrawActions()
         {
             return _da;
+        }
+
+        public IGameProcessing GetGameProcessing()
+        {
+            return _ga;
         }
     }
 }

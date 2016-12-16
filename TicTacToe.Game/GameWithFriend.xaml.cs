@@ -53,14 +53,25 @@ namespace TicTacToe.Game
                                         da.DrawO(i, j, step, grid);
                                     }
 
-                                    if (CheckForWinOrDraw() == false)
+                                    if (gp.CheckForWinOrDraw(field, stepsMade, ref isFieldBlocked, ref pos) == true)
+                                    {
+                                        Win(i, j, pos);
+                                        return;
+                                    }
+
+                                    if (gp.CheckForWinOrDraw(field, stepsMade, ref isFieldBlocked, ref pos) == false)
                                     {
                                         SwapStep();
-                                        break;
+                                        return;
                                     }
-                                    else break;
 
+                                    if (gp.CheckForWinOrDraw(field, stepsMade, ref isFieldBlocked, ref pos) == null)
+                                    {
+                                        gp.Draw(ref isFieldBlocked);
+                                        return;
+                                    }
                                 }
+                                else return;
                             }
                         }
                     }
