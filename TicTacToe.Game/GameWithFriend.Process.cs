@@ -1,12 +1,15 @@
-﻿using System.Windows;
-using System.Windows.Controls;
+﻿using System;
+using System.Windows;
 using System.Windows.Media;
-using System.Windows.Shapes;
 
 namespace TicTacToe.Game
 {
     public partial class GameWithFriend
     {
+        IDrawActions da = Factory.Default.GetDrawActions();
+
+        public event Action<ScreenType> SwitchScreen;
+
         const int X = 1;
         const int O = 2;
         const int step = 85;
@@ -35,68 +38,6 @@ namespace TicTacToe.Game
                 label.Background = null;
                 label1.Background = Brushes.LightCyan;
             }
-        }
-
-        private void DrawX(double i, double j)
-        {
-            Line line = new Line();
-
-            line = new Line();
-            line.Stroke = Brushes.LightGray;
-            line.StrokeThickness = 8;
-
-            line.X1 = 30 + step * j + 20;
-            line.X2 = 30 + step * (j + 1) - 20;
-            line.Y1 = 30 + step * i + 20;
-            line.Y2 = 30 + step * (i + 1) - 20;
-
-            grid.Children.Add(line);
-
-
-            line = new Line();
-            line.Stroke = Brushes.LightGray;
-            line.StrokeThickness = 8;
-
-            line.X1 = 30 + step * (j + 1) - 20;
-            line.X2 = 30 + step * j + 20;
-            line.Y1 = 30 + step * i + 20;
-            line.Y2 = 30 + step * (i + 1) - 20;
-
-            grid.Children.Add(line);
-        }
-
-        private void DrawO(double i, double j)
-        {
-            Ellipse ellipse = new Ellipse();
-
-            SolidColorBrush brush = new SolidColorBrush();
-
-            ellipse.StrokeThickness = 8;
-            ellipse.Stroke = Brushes.LightGray;
-
-            ellipse.Width = 55;
-            ellipse.Height = 55;
-
-            Canvas.SetLeft(ellipse, 44 + step * j);
-            Canvas.SetTop(ellipse, 44 + step * i);
-
-            grid.Children.Add(ellipse);
-        }
-
-        public void DrawLine(double x1, double x2, double x3, double x4)
-        {
-            Line line = new Line();
-
-            line = new Line();
-            line.Stroke = Brushes.LightGray;
-            line.StrokeThickness = 8;
-
-            line.X1 = x1;
-            line.X2 = x2;
-            line.Y1 = x3;
-            line.Y2 = x4;
-
-            grid.Children.Add(line);
         }
 
         private bool? CheckForWinOrDraw()
@@ -143,10 +84,10 @@ namespace TicTacToe.Game
         {
             isFieldBlocked = true;
 
-            if (pos == 0) DrawLine(30, 30 + 85 * 3, 30, 30 + 85 * 3);
-            if (pos == 1) DrawLine(30 + 85 * 3, 30, 30, 30 + 85 * 3);
-            if (pos == 2) DrawLine(30, 85 * 3 + 30, 30 + 85 * y + 85 / 2, 30 + 85 * y + 85 / 2);
-            if (pos == 3) DrawLine(30 + 85 * x + 85 / 2, 30 + 85 * x + 85 / 2, 30, 85 * 3 + 30);
+            if (pos == 0) da.DrawLine(30, 30 + 85 * 3, 30, 30 + 85 * 3, grid);
+            if (pos == 1) da.DrawLine(30 + 85 * 3, 30, 30, 30 + 85 * 3, grid);
+            if (pos == 2) da.DrawLine(30, 85 * 3 + 30, 30 + 85 * y + 85 / 2, 30 + 85 * y + 85 / 2, grid);
+            if (pos == 3) da.DrawLine(30 + 85 * x + 85 / 2, 30 + 85 * x + 85 / 2, 30, 85 * 3 + 30, grid);
 
             if (field[y, x] == X) button2.Content = ++xWins;
             if (field[y, x] == O) button3.Content = ++oWins;

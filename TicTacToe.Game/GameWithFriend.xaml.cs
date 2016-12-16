@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -14,22 +13,15 @@ namespace TicTacToe.Game
             InitializeComponent();
 
             for (int i = 2; i <= 3; i++)
-                DrawLine(30, 85 * 3 + 30, 85 * (i - 1) + 30, 85 * (i - 1) + 30);
+                da.DrawLine(30, 85 * 3 + 30, 85 * (i - 1) + 30, 85 * (i - 1) + 30, grid);
 
             for (int i = 2; i <= 3; i++)
-                DrawLine(85 * (i - 1) + 30, 85 * (i - 1) + 30, 30, 85 * 3 + 30);
+                da.DrawLine(85 * (i - 1) + 30, 85 * (i - 1) + 30, 30, 85 * 3 + 30, grid);
 
-            DrawX(-0.1, 3.39);
-            DrawO(-0.07, 4.36);
+            da.DrawX(-0.1, 3.39, step, grid);
+            da.DrawO(-0.07, 4.36, step, grid);
 
             label.Background = Brushes.LightCyan;
-        }
-
-        public event Action<ScreenType> SwitchScreen;
-
-        private void button_Click(object sender, RoutedEventArgs e)
-        {
-            SwitchScreen?.Invoke(ScreenType.StartScreen);
         }
 
         private void grid_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -54,11 +46,11 @@ namespace TicTacToe.Game
 
                                     if (playerPuts == X)
                                     {
-                                        DrawX(i, j);
+                                        da.DrawX(i, j, step, grid);
                                     }
                                     else
                                     {
-                                        DrawO(i, j);
+                                        da.DrawO(i, j, step, grid);
                                     }
 
                                     if (CheckForWinOrDraw() == false)
@@ -76,6 +68,11 @@ namespace TicTacToe.Game
             }
         }
 
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            SwitchScreen?.Invoke(ScreenType.StartScreen);
+        }
+
         private void button1_Click(object sender, RoutedEventArgs e)
         {
             foreach (var line in grid.Children.OfType<Line>().ToList())
@@ -89,13 +86,13 @@ namespace TicTacToe.Game
             }
 
             for (int i = 2; i <= 3; i++)
-                DrawLine(30, 85 * 3 + 30, 85 * (i - 1) + 30, 85 * (i - 1) + 30);
+                da.DrawLine(30, 85 * 3 + 30, 85 * (i - 1) + 30, 85 * (i - 1) + 30, grid);
 
             for (int i = 2; i <= 3; i++)
-                DrawLine(85 * (i - 1) + 30, 85 * (i - 1) + 30, 30, 85 * 3 + 30);
+                da.DrawLine(85 * (i - 1) + 30, 85 * (i - 1) + 30, 30, 85 * 3 + 30, grid);
 
-            DrawX(-0.1, 3.39);
-            DrawO(-0.07, 4.36);
+            da.DrawX(-0.1, 3.39, step, grid);
+            da.DrawO(-0.07, 4.36, step, grid);
 
             label.Background = Brushes.LightCyan;
             label1.Background = null;
@@ -105,7 +102,7 @@ namespace TicTacToe.Game
             field = new int[3, 3];
             playerPuts = X;
 
-            stepsMade = 0;     
+            stepsMade = 0;
         }
 
         private void button4_Click(object sender, RoutedEventArgs e)

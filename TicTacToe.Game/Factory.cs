@@ -17,10 +17,16 @@
         }
 
         IComputerBrain _cb = new ComputerBrain();
+        IDrawActions _da = new DrawActions();
 
         public IComputerBrain GetComputerBrain()
         {
             return _cb;
+        }
+
+        public IDrawActions GetDrawActions()
+        {
+            return _da;
         }
     }
 }

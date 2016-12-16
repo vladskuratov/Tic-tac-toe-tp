@@ -47,7 +47,6 @@ namespace TicTacToe.Game
             {
                 for (int j = 0; j < 3; j++)
                 {
-                    MessageBox.Show("");
                     if (f[i, j] == 0) return new int[2] { i, j };
                 }
             }

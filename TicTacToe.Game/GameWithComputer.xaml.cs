@@ -1,9 +1,6 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 using System.Windows.Shapes;
 
 namespace TicTacToe.Game
@@ -17,13 +14,11 @@ namespace TicTacToe.Game
             InitializeComponent();
 
             for (int i = 2; i <= 3; i++)
-                DrawLine(30, 85 * 3 + 30, 85 * (i - 1) + 30, 85 * (i - 1) + 30);
+                da.DrawLine(30, 85 * 3 + 30, 85 * (i - 1) + 30, 85 * (i - 1) + 30, grid);
 
             for (int i = 2; i <= 3; i++)
-                DrawLine(85 * (i - 1) + 30, 85 * (i - 1) + 30, 30, 85 * 3 + 30);
+                da.DrawLine(85 * (i - 1) + 30, 85 * (i - 1) + 30, 30, 85 * 3 + 30, grid);
         }
-
-        public event Action<ScreenType> SwitchScreen;
 
         private void grid_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
@@ -57,11 +52,11 @@ namespace TicTacToe.Game
 
                                         if (userPuts == X)
                                         {
-                                            DrawX(i, j);
+                                            da.DrawX(i, j, step, grid);
                                         }
                                         else
                                         {
-                                            DrawO(i, j);
+                                            da.DrawO(i, j, step, grid);
                                         }
 
                                         if (CheckForWinOrDraw() == false)
@@ -103,10 +98,10 @@ namespace TicTacToe.Game
             }
 
             for (int i = 2; i <= 3; i++)
-                DrawLine(30, 85 * 3 + 30, 85 * (i - 1) + 30, 85 * (i - 1) + 30);
+                da.DrawLine(30, 85 * 3 + 30, 85 * (i - 1) + 30, 85 * (i - 1) + 30, grid);
 
             for (int i = 2; i <= 3; i++)
-                DrawLine(85 * (i - 1) + 30, 85 * (i - 1) + 30, 30, 85 * 3 + 30);
+                da.DrawLine(85 * (i - 1) + 30, 85 * (i - 1) + 30, 30, 85 * 3 + 30, grid);
 
             isFieldBlocked = false;
 
@@ -143,6 +138,13 @@ namespace TicTacToe.Game
         private void checkBox_Checked(object sender, RoutedEventArgs e)
         {
             computersTurn = true;
+
+            if (stepsMade == 0)
+            {
+                radioButton.IsEnabled = false;
+                radioButton1.IsEnabled = false;
+                checkBox.IsEnabled = false;
+            }
 
             grid_MouseLeftButtonDown(sender, null);
         }
