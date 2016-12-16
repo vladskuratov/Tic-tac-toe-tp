@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 
 namespace TicTacToe.Game
 {
-    class GameProcessing : IGameProcessing
+    public class GameProcessing : IGameProcessing
     {
         public void Draw(ref bool isFieldBlocked)
         {
@@ -16,7 +11,7 @@ namespace TicTacToe.Game
             MessageBox.Show("Произошла ничья", "Партия!");
         }
 
-        public bool? CheckForWinOrDraw(int[,] field, int stepsMade, ref bool isFieldBlocked, ref int pos)
+        public bool? CheckForWinOrDraw(int[,] field, int stepsMade, ref int pos)
         {
             if (stepsMade < 5) return false;
 

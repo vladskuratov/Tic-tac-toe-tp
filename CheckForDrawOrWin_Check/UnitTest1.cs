@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace TicTacToe.Tests
+namespace CheckForDrawOrWin_Check
 {
     [TestClass]
     public class UnitTest1
@@ -9,7 +9,6 @@ namespace TicTacToe.Tests
         [TestMethod]
         public void TestMethod1()
         {
-
         }
     }
 }
