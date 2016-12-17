@@ -8,7 +8,7 @@ namespace Tests
     {
         GameProcessing gp = new GameProcessing();
 
-        int test_pos = 0; // doesn't matter
+        int test_pos = -1;
         const int X = 1;
         const int O = 2;
 
@@ -22,7 +22,6 @@ namespace Tests
                                         {0, X, O},
                                         {0, X, O}
                                        };
-
         ///////////////////////////////////////////////
 
         int StepsMade()
@@ -36,6 +35,7 @@ namespace Tests
                     if (test_field[i, j] != 0) s++;
                 }
             }
+
             return s;
         }
 

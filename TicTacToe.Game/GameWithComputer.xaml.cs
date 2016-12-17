@@ -11,8 +11,6 @@ namespace TicTacToe.Game
         {
             InitializeComponent();
 
-            InitializeComponent();
-
             for (int i = 2; i <= 3; i++)
                 da.DrawLine(30, 85 * 3 + 30, 85 * (i - 1) + 30, 85 * (i - 1) + 30, grid);
 
@@ -74,7 +72,8 @@ namespace TicTacToe.Game
 
                                         if (gp.CheckForWinOrDraw(field, stepsMade, ref pos) == null)
                                         {
-                                            gp.Draw(ref isFieldBlocked);
+                                            isFieldBlocked = true;
+                                            gp.Draw();
                                             return;
                                         }
                                     }
@@ -116,11 +115,10 @@ namespace TicTacToe.Game
                 da.DrawLine(85 * (i - 1) + 30, 85 * (i - 1) + 30, 30, 85 * 3 + 30, grid);
 
             isFieldBlocked = false;
-
             field = new int[3, 3];
-
             checkBox.IsChecked = false;
             computersTurn = false;
+            stepsMade = 0;
 
             if (radioButton.IsChecked == true)
             {
@@ -132,8 +130,6 @@ namespace TicTacToe.Game
                 userPuts = O;
                 computerPuts = X;
             }
-
-            stepsMade = 0;
         }
 
         private void button4_Click(object sender, RoutedEventArgs e)
@@ -157,11 +153,6 @@ namespace TicTacToe.Game
             }
 
             grid_MouseLeftButtonDown(sender, null);
-        }
-
-        private void checkBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-            computersTurn = false;
         }
 
         private void radioButton1_Checked(object sender, RoutedEventArgs e)

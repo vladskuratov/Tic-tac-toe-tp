@@ -50,7 +50,7 @@ namespace TicTacToe.Game
                 da.DrawO(y, x, step, grid);
             }
 
-            if (gp.CheckForWinOrDraw(field,stepsMade, ref pos) == true)
+            if (gp.CheckForWinOrDraw(field, stepsMade, ref pos) == true)
             {
                 Win(y, x, pos);
                 return;
@@ -61,10 +61,10 @@ namespace TicTacToe.Game
 
             if (gp.CheckForWinOrDraw(field, stepsMade, ref pos) == null)
             {
-                gp.Draw(ref isFieldBlocked);
+                isFieldBlocked = true;
+                gp.Draw();
                 return;
             }
-
         }
 
         private async void Win(int y, int x, int pos)
@@ -81,7 +81,7 @@ namespace TicTacToe.Game
 
             await Task.Delay(250);
 
-            MessageBox.Show(string.Format("Выиграл {0}", (field[y, x] == userPuts) ? "ты" : "компьютер"), "Партия!");
+            MessageBox.Show(string.Format("{0} wins", (field[y, x] == userPuts) ? "You" : "Computer"), "Game!");
         }
     }
 }

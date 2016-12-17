@@ -8,7 +8,7 @@ namespace TicTacToe.Game
     {
         public void DrawX(double i, double j, int step, Canvas grid)
         {
-            Line line = new Line();
+            var line = new Line();
 
             line = new Line();
             line.Stroke = Brushes.LightGray;
@@ -36,9 +36,7 @@ namespace TicTacToe.Game
 
         public void DrawO(double i, double j, int step, Canvas grid)
         {
-            Ellipse ellipse = new Ellipse();
-
-            SolidColorBrush brush = new SolidColorBrush();
+            var ellipse = new Ellipse();
 
             ellipse.StrokeThickness = 8;
             ellipse.Stroke = Brushes.LightGray;
@@ -54,9 +52,8 @@ namespace TicTacToe.Game
 
         public void DrawLine(double x1, double x2, double x3, double x4, Canvas grid)
         {
-            Line line = new Line();
+            var line = new Line();
 
-            line = new Line();
             line.Stroke = Brushes.LightGray;
             line.StrokeThickness = 8;
 

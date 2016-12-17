@@ -2,7 +2,7 @@
 {
     interface IGameProcessing
     {
-        void Draw(ref bool isFieldBlocked);
+        void Draw();
         bool? CheckForWinOrDraw(int[,] field, int stepsMade, ref int pos);
     }
 }

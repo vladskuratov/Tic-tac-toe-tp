@@ -4,15 +4,22 @@ namespace TicTacToe.Game
 {
     public class GameProcessing : IGameProcessing
     {
-        public void Draw(ref bool isFieldBlocked)
+        public void Draw()
         {
-            isFieldBlocked = true;
-
-            MessageBox.Show("Произошла ничья", "Партия!");
+            MessageBox.Show("It's draw...", "Game!");
         }
 
         public bool? CheckForWinOrDraw(int[,] field, int stepsMade, ref int pos)
         {
+            // True - win situation
+            // Null - draw situation
+            // False - nothing happend]
+
+            // Position 2 - horizontal win
+            // Position 3 - vertical win
+            // Position 0 - main diagonal win
+            // Position 1 - adverce diagonal win
+
             if (stepsMade < 5) return false;
 
             for (int i = 0; i < 3; i++)

@@ -58,7 +58,7 @@ namespace TicTacToe.Game
 
             await Task.Delay(250);
 
-            MessageBox.Show(string.Format("Выиграл {0}", (field[y, x] == X) ? "крестик" : "нолик"), "Партия!");
+            MessageBox.Show(string.Format("{0} wins", (field[y, x] == X) ? "Cross" : "Toe"), "Game!");
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 
@@ -33,12 +32,13 @@ namespace TicTacToe.Game
         {
             int d, r;
 
+            // Move to the right screens
             if (screen != ScreenType.StartScreen)
             {
-                contentControl2.Margin = new Thickness { Left = 525 };
-
                 if (screen == ScreenType.GameWithFriend) contentControl2.Content = gf;
                 if (screen == ScreenType.GameWithComputer) contentControl2.Content = gc;
+
+                contentControl2.Margin = new Thickness { Left = 525 };
 
                 d = 0;
                 r = 525;
@@ -49,10 +49,10 @@ namespace TicTacToe.Game
                     contentControl2.Margin = new Thickness { Left = r -= 25 };
                     if (contentControl2.Margin.Left == 0) timer.Stop();
                 };
-
                 timer.Interval = TimeSpan.FromMilliseconds(1);
                 timer.Start();
             }
+            // Move to the left screen (start)
             else
             {
                 d = -1050;
@@ -64,7 +64,6 @@ namespace TicTacToe.Game
                     contentControl2.Margin = new Thickness { Left = r += 25 };
                     if (contentControl.Margin.Left == 0) timer.Stop();
                 };
-
                 timer.Interval = TimeSpan.FromMilliseconds(1);
                 timer.Start();
             }

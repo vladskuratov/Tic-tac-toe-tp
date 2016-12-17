@@ -67,7 +67,8 @@ namespace TicTacToe.Game
 
                                     if (gp.CheckForWinOrDraw(field, stepsMade, ref pos) == null)
                                     {
-                                        gp.Draw(ref isFieldBlocked);
+                                        isFieldBlocked = true;
+                                        gp.Draw();
                                         return;
                                     }
                                 }
@@ -109,10 +110,8 @@ namespace TicTacToe.Game
             label1.Background = null;
 
             isFieldBlocked = false;
-
             field = new int[3, 3];
             playerPuts = X;
-
             stepsMade = 0;
         }
 

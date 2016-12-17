@@ -19,7 +19,7 @@
         <Label x:Name="label3" Content="Starts:" Canvas.Left="326" Canvas.Top="182"/>
         <RadioButton x:Name="radioButton" Content="X" Canvas.Left="376" Canvas.Top="163" IsChecked="True" Checked="radioButton_Checked"/>
         <RadioButton x:Name="radioButton1" Content="O" Canvas.Left="413" Canvas.Top="163" Checked="radioButton1_Checked"/>
-        <CheckBox x:Name="checkBox" Content="Computer" Canvas.Left="376" Canvas.Top="187" Checked="checkBox_Checked" Unchecked="checkBox_Unchecked"/>
+        <CheckBox x:Name="checkBox" Content="Computer" Canvas.Left="376" Canvas.Top="187" Checked="checkBox_Checked" />
 
     </Canvas>
 </UserControl>
