@@ -12,6 +12,19 @@ namespace Tests
         const int X = 1;
         const int O = 2;
 
+        bool? win = true;
+        bool? draw = null;
+        bool? nothing = false;
+
+        ///////////////////////////////////////////////
+        int[,] test_field = new int[,] {
+                                        {0, X, 0},
+                                        {0, X, O},
+                                        {0, X, O}
+                                       };
+
+        ///////////////////////////////////////////////
+
         int StepsMade()
         {
             int s = 0;
@@ -26,23 +39,10 @@ namespace Tests
             return s;
         }
 
-        bool? win = true;
-        bool? draw = null;
-        bool? nothing = false;
-
-        /// ////////////////////////////////////////////
-        int[,] test_field = new int[,] {
-                                        {0, X, 0},
-                                        {0, X, O},
-                                        {0, X, O}
-                                       };
-
-        /// ////////////////////////////////////////////
-
         [TestMethod]
         public void CheckForWinOrDraw()
         {
-            var testedValue = gp.CheckForWinOrDraw(test_field, StepsMade(), ref test_pos);
+            bool? testedValue = gp.CheckForWinOrDraw(test_field, StepsMade(), ref test_pos);
 
             Assert.AreEqual(win, testedValue);
         }
