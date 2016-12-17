@@ -138,8 +138,6 @@ namespace TicTacToe.Game
 
         private void button4_Click(object sender, RoutedEventArgs e)
         {
-            button1_Click(sender, e);
-
             button2.Content = 0;
             button3.Content = 0;
 
