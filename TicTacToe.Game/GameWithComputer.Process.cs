@@ -31,7 +31,7 @@ namespace TicTacToe.Game
 
         private async void ComputersTurn()
         {
-            await Task.Delay(250);
+            computersTurn = false;
 
             int x = cb.MyTurnYX(field)[1];
             int y = cb.MyTurnYX(field)[0];
@@ -41,10 +41,12 @@ namespace TicTacToe.Game
 
             if (computerPuts == X)
             {
+                await Task.Delay(250);
                 da.DrawX(y, x, step, grid);
             }
             else
             {
+                await Task.Delay(250);
                 da.DrawO(y, x, step, grid);
             }
 
@@ -55,10 +57,7 @@ namespace TicTacToe.Game
             }
 
             if (gp.CheckForWinOrDraw(field, stepsMade, ref pos) == false)
-            {
-                computersTurn = false;
                 return;
-            }
 
             if (gp.CheckForWinOrDraw(field, stepsMade, ref pos) == null)
             {
