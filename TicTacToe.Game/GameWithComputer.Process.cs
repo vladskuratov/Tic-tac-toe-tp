@@ -62,7 +62,7 @@ namespace TicTacToe.Game
             if (gp.CheckForWinOrDraw(field, stepsMade, ref pos) == null)
             {
                 isFieldBlocked = true;
-                gp.Draw();
+                Draw();
                 return;
             }
         }
@@ -80,8 +80,13 @@ namespace TicTacToe.Game
             if (field[y, x] == userPuts) button2.Content = ++userWins;
 
             await Task.Delay(250);
-
             MessageBox.Show(string.Format("{0} wins", (field[y, x] == userPuts) ? "You" : "Computer"), "Game!");
+        }
+
+        public async void Draw()
+        {
+            await Task.Delay(250);
+            MessageBox.Show("It's draw...", "Game!");
         }
     }
 }

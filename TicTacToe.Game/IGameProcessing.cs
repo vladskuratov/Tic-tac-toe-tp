@@ -2,7 +2,6 @@
 {
     interface IGameProcessing
     {
-        void Draw();
         bool? CheckForWinOrDraw(int[,] field, int stepsMade, ref int pos);
     }
 }

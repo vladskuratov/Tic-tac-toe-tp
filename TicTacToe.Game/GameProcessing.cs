@@ -1,14 +1,7 @@
-﻿using System.Windows;
-
-namespace TicTacToe.Game
+﻿namespace TicTacToe.Game
 {
     public class GameProcessing : IGameProcessing
     {
-        public void Draw()
-        {
-            MessageBox.Show("It's draw...", "Game!");
-        }
-
         public bool? CheckForWinOrDraw(int[,] field, int stepsMade, ref int pos)
         {
             // True - win situation

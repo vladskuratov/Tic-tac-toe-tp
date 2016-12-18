@@ -73,7 +73,7 @@ namespace TicTacToe.Game
                                         if (gp.CheckForWinOrDraw(field, stepsMade, ref pos) == null)
                                         {
                                             isFieldBlocked = true;
-                                            gp.Draw();
+                                            Draw();
                                             return;
                                         }
                                     }

@@ -60,5 +60,11 @@ namespace TicTacToe.Game
 
             MessageBox.Show(string.Format("{0} wins", (field[y, x] == X) ? "Cross" : "Toe"), "Game!");
         }
+
+        public async void Draw()
+        {
+            await Task.Delay(250);
+            MessageBox.Show("It's draw...", "Game!");
+        }
     }
 }
